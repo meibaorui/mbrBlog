@@ -1,0 +1,128 @@
+﻿@model mbrBlog.Models.BlogEditorVM
+@{
+    ViewBag.Title = "Editor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var initLabelStr = "";
+    var id = "";
+    var title = "";
+    var content="";
+    if (Model.Article != null)
+    {
+        foreach (var label in Model.Article.ArticleLabel)
+        {
+            initLabelStr += label.Id + "," + label.Title + ";";
+        }
+        id = Model.Article.Id.ToString();
+        title = Model.Article.Title;
+        content = Model.Article.Content;
+    }
+}
+
+
+<link rel="stylesheet" type="text/css" href="~/Content/simditor/simditor.css" />
+<script type="text/javascript" src="~/Scripts/simditor/jquery.min.js"></script>
+<script type="text/javascript" src="~/Scripts/simditor/module.js"></script>
+<script type="text/javascript" src="~/Scripts/simditor/hotkeys.js"></script>
+<script type="text/javascript" src="~/Scripts/simditor/uploader.js"></script>
+<script type="text/javascript" src="~/Scripts/simditor/simditor.js"></script>
+
+<div class="row">
+    <div class="col-md-2" style="text-align: left">
+        <h2>&lt;首页</h2>
+    </div>
+    <div class="col-md-8">
+        <h1 style="text-align: center">博客编辑</h1>
+    </div>
+    <div class="col-md-2" style="text-align: right">
+        <h2>列表&gt;</h2>
+    </div>
+</div>
+<div></div>
+<form action="@Url.Action("SubmitBlogEditor","Home")" method="post">
+    <div class="form-group">
+        <input type="text" id="id" name="id" style="display: none" value="@id" />
+        <input type="text" class="form-control" id="title" placeholder="标题" name="title" value="@title"/>
+        <div>
+            <p></p>
+        </div>
+        <label>标签选择：</label>
+
+        <div class="btn-group" data-toggle="buttons">
+            @foreach (var label in Model.SelectLabelList)
+            {
+                var hasLabel = false;
+                if (Model.Article != null)
+                {
+                    var idList = Model.Article.ArticleLabel.Select(item => item.Id);
+                    if (idList.Contains(label.Id))
+                    {
+                        hasLabel = true;
+                    }
+                }
+                if (hasLabel)
+                {
+                    <label class="btn btn-default check-label active" data-id="@label.Id" data-title="@label.Title">
+                        <input type="checkbox" autocomplete="off">
+                        @label.Title
+                    </label>
+                }
+                else
+                {
+                    <label class="btn btn-default check-label" data-id="@label.Id" data-title="@label.Title">
+                        <input type="checkbox" autocomplete="off">
+                        @label.Title
+                    </label>
+                }
+            }
+        </div>
+        <div>
+            <p></p>
+        </div>
+        <input type="text" name="labelString" id="labelString" value="@initLabelStr" style="display: none" />
+        <textarea id="editor" placeholder="博客内容……" name="Content">@content</textarea>
+        <button type="submit" class="btn btn-primary">提交</button>
+    </div>
+</form>
+
+<script type="text/javascript">
+    var editor = new Simditor({
+        toolbar:
+        [
+            'title',
+            'bold',
+            'italic',
+            'underline',
+            'strikethrough',
+            'color',
+            'ol',
+            'ul',
+            'blockquote',
+            'code',
+            'table',
+            'link',
+            'image',
+            'hr',
+            'indent',
+            'outdent',
+            'alignment',
+        ],
+        textarea: $('#editor'),
+
+        //optional options
+    });
+    $(function () {
+        $("#nav-manage").addClass("active");
+        $(".check-label").click(function () {
+            var id = $(this).attr("data-id")
+            var title = $(this).attr("data-title")
+            var labelstringItem = id + ',' + title + ';'
+            var labelString = $("#labelString").val()
+            var position = $("#labelString").val().indexOf(labelstringItem)
+            if (position > -1) {
+                $("#labelString").val(labelString.substring(0, position) + labelString.substring(position + labelstringItem.length, labelString.length))
+            } else {
+                $("#labelString").val(labelString + labelstringItem);
+            }
+        })
+    })
+</script>

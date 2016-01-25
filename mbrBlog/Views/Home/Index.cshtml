@@ -1,0 +1,48 @@
+﻿@model mbrBlog.Models.HomeIndexVM
+@{
+    ViewBag.Title = "梅葆瑞的博客";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2></h2>
+<div id="left" class="navbar-right  col-md-3">
+    <div>
+        <div id="labelList" class="panel panel-default">
+            <div class="panel-heading">标签列表</div>
+            <ul class="list-group">
+                @foreach (var item in Model.ArticleLabelList)
+                {
+
+                    <li class="list-group-item">
+                        <span class="badge">@item.Article.Count</span>
+                        @item.Title
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+</div>
+<div class="clearfix col-md-9 ">
+    @foreach (var item in Model.ArticleList)
+    {
+        <article>
+            <header>
+                <a class="glyphicon glyphicon-pencil" href="@Url.Action("BlogEditor", "Home", new { id = item.Id })"></a>
+                <a href="@Url.Action("Blog", "Home", new { id = item.Id })">@item.Title</a>
+                @foreach (var label in item.ArticleLabel)
+                {
+                    <span class="label label-primary">@(label.Title) </span><span>&nbsp;</span>
+                }
+                
+            </header>
+        </article>
+        <hr />
+    }
+    <a class="btn btn-primary" href="@Url.Action("BlogEditor","Home")">添加博文</a>
+</div>
+<script>
+    $(function () {
+        $("#nav-index").addClass("active");
+    })
+</script>

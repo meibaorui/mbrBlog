@@ -1,0 +1,20 @@
+﻿@model mbrBlog.Models.BlogVM
+@{
+    ViewBag.Title = "梅葆瑞的博客 - "+Model.Article.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<article>
+    <header>@Model.Article.Title</header>
+    <div>
+        <div><p></p></div>
+        <span>标签：</span>
+        @foreach (var label in Model.Article.ArticleLabel)
+        {
+            <span class="label label-primary">@(label.Title) </span><span>&nbsp;</span>
+        }
+        <div><p></p></div>
+    </div>
+    <section>@Html.Raw(Model.Article.Content)</section>
+    <footer><time datetime="@Model.Article.PublicationTime.Value.Date.ToString("yyyy-MM-dd")" pubdate><span class="glyphicon glyphicon-time"></span> @Model.Article.PublicationTime</time></footer>
+</article>

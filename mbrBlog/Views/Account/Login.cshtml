@@ -1,0 +1,13 @@
+﻿@model mbrBlog.Models.LoginVM
+@{
+    ViewBag.Title = "梅葆瑞的博客-登录";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>登录</h2>
+@using (Html.BeginForm()) 
+{
+    @Html.ValidationSummary(true)
+    @Html.EditorForModel()
+    <p><button type="submit" class="btn btn-primary">登录</button></p>
+}
