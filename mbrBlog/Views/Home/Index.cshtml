@@ -2,13 +2,8 @@
 @{
     ViewBag.Title = "梅葆瑞的博客";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var subContentLength = 500;
 }
 
-@*<div>
-        <h2>操作</h2>
-        <a href="@Url.Action("BlogEditor","Home")">添加新文章</a>
-    </div>*@
 <h2></h2>
 <div id="left" class="navbar-right  col-md-3">
     <div>
@@ -29,12 +24,12 @@
 
 </div>
 <div class="clearfix col-md-9 ">
-    @*<a class="btn btn-primary glyphicon-plus small" style="color:white" href="@Url.Action("BlogEditor","Home")"></a>*@
     @foreach (var item in Model.ArticleList)
     {
         <article>
             <header>
-                <a class="glyphicon glyphicon-pencil" href="@Url.Action("BlogEditor", "Home", new { id = item.Id })"></a><a href="@Url.Action("Blog", "Home", new { id = item.Id })">@item.Title</a>
+                <a class="glyphicon glyphicon-pencil" href="@Url.Action("BlogEditor", "Home", new { id = item.Id })"></a>
+                <a href="@Url.Action("Blog", "Home", new { id = item.Id })">@item.Title</a>
                 @foreach (var label in item.ArticleLabel)
                 {
                     <span class="label label-primary">@(label.Title) </span><span>&nbsp;</span>
