@@ -9,18 +9,20 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <div class="container">
-        <div>
-            <h1 style="text-align: center">梅葆瑞的博客</h1>
-            <p style="text-align: center">这是一个正在开发的试验品</p>
-        </div>
+    <div class="jumbotron">
+        <h1 style="text-align: center">梅葆瑞的博客</h1>
+        <p style="text-align: center">这是一个正在开发的试验品</p>
+    </div>
+    <div class="container ">
+       
         <div>
             <ul class="nav nav-tabs nav-justified">
-                <li role="presentation" id="nav-index"><a href="@Url.Action("Index","Home")">首页</a></li>
+                <li role="presentation" id="nav-index"><a href="@Url.Action("Index","Home")">博文</a></li>
                 <li role="presentation"><a href="#">简历</a></li>
                 <li role="presentation"><a href="#">关于</a></li>
             </ul>
         </div>
+
         @RenderBody()
     </div>
 </body>

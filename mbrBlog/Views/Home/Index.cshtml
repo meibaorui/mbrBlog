@@ -6,59 +6,45 @@
 }
 
 @*<div>
-    <h2>操作</h2>
-    <a href="@Url.Action("BlogEditor","Home")">添加新文章</a>
-</div>*@
-<div>
-    <h2>标签列表</h2>
-    @foreach (var item in Model.ArticleLabelList)
-    {
-        <div><p> </p></div>
-        <span class="label label-primary">@item.Title <span class="badge">@item.Article.Count</span></span>
-    }
+        <h2>操作</h2>
+        <a href="@Url.Action("BlogEditor","Home")">添加新文章</a>
+    </div>*@
+<h2></h2>
+<div id="left" class="navbar-right  col-md-3">
+    <div>
+        <div id="labelList" class="panel panel-default">
+            <div class="panel-heading">标签列表</div>
+            <ul class="list-group">
+                @foreach (var item in Model.ArticleLabelList)
+                {
+
+                    <li class="list-group-item">
+                        <span class="badge">@item.Article.Count</span>
+                        @item.Title
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
 </div>
-<div>
-    <div><h2>文章列表 <a class="btn btn-primary glyphicon-plus small" style="color:white" href="@Url.Action("BlogEditor","Home")"></a></h2></div>
-    
+<div class="clearfix col-md-9 ">
+    @*<a class="btn btn-primary glyphicon-plus small" style="color:white" href="@Url.Action("BlogEditor","Home")"></a>*@
     @foreach (var item in Model.ArticleList)
     {
         <article>
             <header>
-                <a href="@Url.Action("Blog", "Home", new { id = item.Id })">@item.Title</a>
-                @*<span>标签：</span>*@
+                <a class="glyphicon glyphicon-pencil" href="@Url.Action("BlogEditor", "Home", new { id = item.Id })"></a><a href="@Url.Action("Blog", "Home", new { id = item.Id })">@item.Title</a>
                 @foreach (var label in item.ArticleLabel)
                 {
                     <span class="label label-primary">@(label.Title) </span><span>&nbsp;</span>
                 }
-                <a class="btn btn-primary navbar-right" href="@Url.Action("BlogEditor", "Home", new { id = item.Id })">编辑</a>
+                
             </header>
         </article>
         <hr />
-        @*<div>
-                <div><p></p></div>
-                <span>标签：</span>
-                @foreach (var label in item.ArticleLabel)
-                {
-                    <span class="label label-primary">@(label.Title) </span><span>&nbsp;</span>
-                }
-                <div><p></p></div>
-            </div>
-            <div>
-                @if (item.Content.Length > subContentLength)
-                {
-                    @Html.Raw(item.Content.Substring(0, subContentLength) + "……")
-                }
-                else
-                {
-                    @Html.Raw(item.Content)
-                }
-            </div>
-
-                <div>
-                    <a class="btn btn-primary" href="@Url.Action("Blog", "Home", new { id = item.Id })">阅读全部</a>
-                    <a class="btn btn-primary" href="@Url.Action("BlogEditor", "Home", new { id = item.Id })">编辑</a>
-                </div>*@
     }
+    <a class="btn btn-primary" href="@Url.Action("BlogEditor","Home")">添加博文</a>
 </div>
 <script>
     $(function () {
