@@ -1,0 +1,67 @@
+﻿@model mbrBlog.Models.HomeIndexVM
+@{
+    ViewBag.Title = "梅葆瑞的博客";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var subContentLength = 500;
+}
+
+@*<div>
+    <h2>操作</h2>
+    <a href="@Url.Action("BlogEditor","Home")">添加新文章</a>
+</div>*@
+<div>
+    <h2>标签列表</h2>
+    @foreach (var item in Model.ArticleLabelList)
+    {
+        <div><p> </p></div>
+        <span class="label label-primary">@item.Title <span class="badge">@item.Article.Count</span></span>
+    }
+</div>
+<div>
+    <div><h2>文章列表 <a class="btn btn-primary glyphicon-plus small" style="color:white" href="@Url.Action("BlogEditor","Home")"></a></h2></div>
+    
+    @foreach (var item in Model.ArticleList)
+    {
+        <article>
+            <header>
+                <a href="@Url.Action("Blog", "Home", new { id = item.Id })">@item.Title</a>
+                @*<span>标签：</span>*@
+                @foreach (var label in item.ArticleLabel)
+                {
+                    <span class="label label-primary">@(label.Title) </span><span>&nbsp;</span>
+                }
+                <a class="btn btn-primary navbar-right" href="@Url.Action("BlogEditor", "Home", new { id = item.Id })">编辑</a>
+            </header>
+        </article>
+        <hr />
+        @*<div>
+                <div><p></p></div>
+                <span>标签：</span>
+                @foreach (var label in item.ArticleLabel)
+                {
+                    <span class="label label-primary">@(label.Title) </span><span>&nbsp;</span>
+                }
+                <div><p></p></div>
+            </div>
+            <div>
+                @if (item.Content.Length > subContentLength)
+                {
+                    @Html.Raw(item.Content.Substring(0, subContentLength) + "……")
+                }
+                else
+                {
+                    @Html.Raw(item.Content)
+                }
+            </div>
+
+                <div>
+                    <a class="btn btn-primary" href="@Url.Action("Blog", "Home", new { id = item.Id })">阅读全部</a>
+                    <a class="btn btn-primary" href="@Url.Action("BlogEditor", "Home", new { id = item.Id })">编辑</a>
+                </div>*@
+    }
+</div>
+<script>
+    $(function () {
+        $("#nav-index").addClass("active");
+    })
+</script>
