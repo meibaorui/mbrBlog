@@ -5,7 +5,7 @@
     var initLabelStr = "";
     var id = "";
     var title = "";
-    var content="";
+    var content = "";
     if (Model.Article != null)
     {
         foreach (var label in Model.Article.ArticleLabel)
@@ -41,7 +41,7 @@
 <form action="@Url.Action("SubmitBlogEditor","Home")" method="post">
     <div class="form-group">
         <input type="text" id="id" name="id" style="display: none" value="@id" />
-        <input type="text" class="form-control" id="title" placeholder="标题" name="title" value="@title"/>
+        <input type="text" class="form-control" id="title" placeholder="标题" name="title" value="@title" />
         <div>
             <p></p>
         </div>
@@ -83,46 +83,47 @@
         <button type="submit" class="btn btn-primary">提交</button>
     </div>
 </form>
+@section Scripts{
+    <script type="text/javascript">
+        var editor = new Simditor({
+            toolbar:
+            [
+                'title',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'color',
+                'ol',
+                'ul',
+                'blockquote',
+                'code',
+                'table',
+                'link',
+                'image',
+                'hr',
+                'indent',
+                'outdent',
+                'alignment',
+            ],
+            textarea: $('#editor'),
 
-<script type="text/javascript">
-    var editor = new Simditor({
-        toolbar:
-        [
-            'title',
-            'bold',
-            'italic',
-            'underline',
-            'strikethrough',
-            'color',
-            'ol',
-            'ul',
-            'blockquote',
-            'code',
-            'table',
-            'link',
-            'image',
-            'hr',
-            'indent',
-            'outdent',
-            'alignment',
-        ],
-        textarea: $('#editor'),
-
-        //optional options
-    });
-    $(function () {
-        $("#nav-manage").addClass("active");
-        $(".check-label").click(function () {
-            var id = $(this).attr("data-id")
-            var title = $(this).attr("data-title")
-            var labelstringItem = id + ',' + title + ';'
-            var labelString = $("#labelString").val()
-            var position = $("#labelString").val().indexOf(labelstringItem)
-            if (position > -1) {
-                $("#labelString").val(labelString.substring(0, position) + labelString.substring(position + labelstringItem.length, labelString.length))
-            } else {
-                $("#labelString").val(labelString + labelstringItem);
-            }
+            //optional options
+        });
+        $(function () {
+            $("#nav-manage").addClass("active");
+            $(".check-label").click(function () {
+                var id = $(this).attr("data-id")
+                var title = $(this).attr("data-title")
+                var labelstringItem = id + ',' + title + ';'
+                var labelString = $("#labelString").val()
+                var position = $("#labelString").val().indexOf(labelstringItem)
+                if (position > -1) {
+                    $("#labelString").val(labelString.substring(0, position) + labelString.substring(position + labelstringItem.length, labelString.length))
+                } else {
+                    $("#labelString").val(labelString + labelstringItem);
+                }
+            })
         })
-    })
-</script>
+    </script>
+}

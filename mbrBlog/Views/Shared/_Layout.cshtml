@@ -3,23 +3,14 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
-    <script type="text/javascript" src="~/Scripts/simditor/jquery.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
     <title>@ViewBag.Title</title>
-    <script>
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?057333a53a962b89e5f6c966e96843c5";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
 </head>
 <body>
     <div class="jumbotron">
-        <h1 style="text-align: center">梅葆瑞的博客</h1>
+        <img style="max-width: 7%;height: auto;display: block;" src="@Url.Content("~/Images/headImg.jpg")" class="img-circle center-block">
+
+        <h2 style="text-align: center">梅葆瑞的博客</h2>
         <p style="text-align: center">这是一个正在开发的试验品</p>
     </div>
     <div class="container ">
@@ -35,5 +26,23 @@
 
         @RenderBody()
     </div>
+    <div><p></p></div>
+    <div class=".navbar-fixed-bottom jumbotron" style="margin-bottom:0px">
+        <p style="text-align: center;font-size:medium">Designed and Developed by MeiBaoRui.</p>
+        <p style="text-align: center;font-size:medium">Copyright © 2015-@DateTime.Now.Year MeiBaoRui All Rights Reserved.</p>
+        <p style="text-align: center;font-size:medium">京ICP备14056205号</p>
+    </div>
+    <script type="text/javascript" src="~/Scripts/simditor/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?057333a53a962b89e5f6c966e96843c5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    @RenderSection("Scripts", false)
 </body>
 </html>

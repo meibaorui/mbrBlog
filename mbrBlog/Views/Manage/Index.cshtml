@@ -4,9 +4,10 @@
 }
 <h2>后台管理</h2>
 <a class="btn btn-primary" href="@Url.Action("BlogEditor","Home")">添加博文</a>
-
-<script>
-    $(function () {
-        $("#nav-manage").addClass("active");
-    })
-</script>
+@section Scripts{
+    <script>
+        $(function () {
+            $("#nav-manage").addClass("active");
+        })
+    </script>
+}

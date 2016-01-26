@@ -70,7 +70,6 @@ namespace mbrBlog.Controllers
             article.PublicationTime = DateTime.Now;
             if (request.Id == null)
             {
-                article.Id = request.Id.Value;
                 ArticleDal.AddArticle(article);
             }
             else

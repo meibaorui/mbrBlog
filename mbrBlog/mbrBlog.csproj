@@ -166,6 +166,7 @@
     <Content Include="Content\simditor\simditor.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\headImg.jpg" />
     <Content Include="Images\simditor.png" />
     <Content Include="Scripts\bootstrap-wysiwyg.js" />
     <Content Include="Scripts\bootstrap.js" />
