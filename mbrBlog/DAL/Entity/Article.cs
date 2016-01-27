@@ -23,6 +23,7 @@ namespace mbrBlog.DAL.Entity
         public string Title { get; set; }
         public string Content { get; set; }
         public Nullable<System.DateTime> PublicationTime { get; set; }
+        public Nullable<int> PvCount { get; set; }
     
         public virtual ICollection<ArticleLabel> ArticleLabel { get; set; }
     }

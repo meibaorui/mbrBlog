@@ -85,6 +85,7 @@ namespace mbrBlog.Controllers
         /// <returns></returns>
         public ActionResult Blog(int id)
         {
+            ArticleDal.ArticlePvAdd(id);
             var article = ArticleDal.GetArticle(id);
             return View(new BlogVM { Article = article });
         }

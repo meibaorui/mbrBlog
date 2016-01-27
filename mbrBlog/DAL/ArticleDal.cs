@@ -9,7 +9,11 @@ namespace mbrBlog.DAL
 {
     public static class ArticleDal
     {
-
+        /// <summary>
+        /// 更新博客
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
         public static int UpdateArticle(Article article)
         {
             using (BlogEntities blogEntities = new BlogEntities())
@@ -19,7 +23,6 @@ namespace mbrBlog.DAL
                 //changeArticle.PublicationTime = article.PublicationTime;
                 changeArticle.Title = article.Title;
                 changeArticle.Content = article.Content;
-
                 var ArticleLabelList = article.ArticleLabel;
                 var newLabelList =new List<ArticleLabel>();
                 var oldLabelList = new List<ArticleLabel>(changeArticle.ArticleLabel);
@@ -49,6 +52,22 @@ namespace mbrBlog.DAL
             return article.Id;
         }
 
+        public static int ArticlePvAdd(int id)
+        {
+            using (var blogEntities = new BlogEntities())
+            {
+                var article = blogEntities.Article.First(a => a.Id == id);
+                article.PvCount += 1;
+                blogEntities.SaveChanges();
+                return article.PvCount.Value;
+            }
+        }
+
+        /// <summary>
+        /// 添加博客
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
         public static int AddArticle(Article article)
         {
             var articleTemp = article;
@@ -70,7 +89,10 @@ namespace mbrBlog.DAL
             }
             return articleTemp.Id;
         }
-
+        /// <summary>
+        /// 删除博客
+        /// </summary>
+        /// <param name="id"></param>
         public static void DeleteArticle(int id)
         {
             var article = GetArticle(id);
@@ -83,7 +105,11 @@ namespace mbrBlog.DAL
                 blogEntities.SaveChanges();
             }
         }
-
+        /// <summary>
+        /// 获取博客
+        /// </summary>
+        /// <param name="articleId"></param>
+        /// <returns></returns>
         public static Article GetArticle(int articleId)
         {
             Article article = null;
@@ -93,7 +119,11 @@ namespace mbrBlog.DAL
             }
             return article;
         }
-
+        /// <summary>
+        /// 按条件检索博客
+        /// </summary>
+        /// <param name="selectArticleRequest"></param>
+        /// <returns></returns>
         public static List<Article> SelectArticleList(SelectArticleRequest selectArticleRequest)
         {
             List<Article> list = null;
@@ -131,7 +161,11 @@ namespace mbrBlog.DAL
             }
             return list;
         }
-
+        /// <summary>
+        /// 根据标签名获取标签
+        /// </summary>
+        /// <param name="labelTitle"></param>
+        /// <returns></returns>
         public static ArticleLabel GetLabelByTitle(string labelTitle)
         {
             ArticleLabel articleLabel = null;
@@ -141,7 +175,10 @@ namespace mbrBlog.DAL
             }
             return articleLabel;
         }
-
+        /// <summary>
+        /// 获取所有标签
+        /// </summary>
+        /// <returns></returns>
         public static List<ArticleLabel> GetAllLabel()
         {
             List<ArticleLabel> list = null;
@@ -154,6 +191,10 @@ namespace mbrBlog.DAL
             return list;
         }
 
+        /// <summary>
+        /// 获取所有标签和标签中的所有博文
+        /// </summary>
+        /// <returns></returns>
         public static List<ArticleLabel> GetAllLabelAndArticle()
         {
             List<ArticleLabel> list = null;
