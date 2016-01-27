@@ -34,8 +34,8 @@
                 {
                     <span class="label label-primary">@(label.Title) </span><span>&nbsp;</span>
                 }
-                
             </header>
+            <span class="navbar-right"><time datetime="@item.PublicationTime.Value.Date.ToString("yyyy-MM-dd")" pubdate><span class="glyphicon glyphicon-time"></span> @item.PublicationTime</time></span>
         </article>
         <hr />
     }
